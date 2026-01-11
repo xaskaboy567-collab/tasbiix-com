@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tasbiix System</title>
+
+<style>
+:root{
+    --bg:#0f2027;
+    --card:#111;
+    --text:#ffffff;
+    --primary:#00ffcc;
+    --btnText:#000;
+}
+
+/* Light mode */
+.light{
+    --bg:#f2f2f2;
+    --card:#ffffff;
+    --text:#000000;
+    --primary:#00796b;
+    --btnText:#ffffff;
+}
+
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: var(--bg);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    color:var(--text);
+    transition:0.3s;
+}
+
+.container{
+    background:var(--card);
+    padding:25px;
+    border-radius:15px;
+    width:320px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,0.5);
+    transition:0.3s;
+}
+
+h1{
+    margin-bottom:10px;
+    color:var(--primary);
+}
+
+select{
+    width:100%;
+    padding:10px;
+    border-radius:8px;
+    border:none;
+    margin-bottom:20px;
+    font-size:16px;
+}
+
+.counter{
+    font-size:60px;
+    margin:20px 0;
+    color:var(--primary);
+}
+
+.btn{
+    width:100%;
+    padding:15px;
+    margin:8px 0;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+.count{
+    background:var(--primary);
+    color:var(--btnText);
+}
+
+.reset{
+    background:#ff4d4d;
+    color:white;
+}
+
+.mode{
+    background:none;
+    border:1px solid var(--primary);
+    color:var(--text);
+    padding:8px;
+    border-radius:8px;
+    cursor:pointer;
+    margin-bottom:15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <button class="mode" onclick="toggleMode()">🌙 / ☀️ Mode</button>
+
+    <h1>📿 Tasbiix System</h1>
+
+    <select>
+        <option>Subxaanallah</option>
+        <option>Alxamdulillah</option>
+        <option>Allaahu Akbar</option>
+    </select>
+
+    <div class="counter" id="count">0</div>
+
+    <button class="btn count" onclick="increase()">Tasbiix</button>
+    <button class="btn reset" onclick="resetCount()">Reset</button>
+</div>
+
+<script>
+let count = localStorage.getItem("count")
+    ? parseInt(localStorage.getItem("count"))
+    : 0;
+
+document.getElementById("count").innerText = count;
+
+/* Dark / Light Mode */
+if(localStorage.getItem("mode") === "light"){
+    document.body.classList.add("light");
+}
+
+function toggleMode(){
+    document.body.classList.toggle("light");
+    localStorage.setItem(
+        "mode",
+        document.body.classList.contains("light") ? "light" : "dark"
+    );
+}
+
+/* Counter */
+function increase(){
+    count++;
+    document.getElementById("count").innerText = count;
+    localStorage.setItem("count", count);
+}
+
+function resetCount(){
+    count = 0;
+    document.getElementById("count").innerText = count;
+    localStorage.setItem("count", count);
+}
+</script>
+
+</body>
+</html>
